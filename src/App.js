@@ -12,11 +12,12 @@ Link
 
 
 function App(){
+  const name="Test"
   return <div className="container">
     <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-      <LoginFunctional firstname="user1" lastname="user2"/>
+      <LoginFunctional firstname={name} lastname="user2"/>
       </Route>
 <Route path="/home">
 

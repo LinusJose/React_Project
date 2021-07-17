@@ -2,7 +2,8 @@
 import{useState} from 'react';
 
 import { useHistory } from 'react-router-dom';
-function LoginFunctional(){
+import {Formik} from 'formik';
+function LoginFunctional(props){
     const history=useHistory();
     const [ username,setUsername ]=useState("");
     const [ password,SetPassword ]=useState("");
@@ -20,7 +21,7 @@ function LoginFunctional(){
         event.preventDefault();
     
         if(username=="user1"&&password=="123"){
-            alert("Success")
+            alert("Success from Login Functional")
         history.push("/home")
     
         }
@@ -35,17 +36,29 @@ function LoginFunctional(){
     <h1>Login {username}</h1>
     <div className="col-md-6">
 
- <form onSubmit={onSubmitClick}>
-     <label>Username</label>
-    <input className="form-control" type="text" name="username" onChange={usernameChange} />
-    <label>Password</label>
-      <input className="form-control" type="password" name="password" onChange={passwordChange}/>
-  <button className="btn btn-primary" type="submit">Login </button> 
-    
 
 
+<Formik
+initialValues={{
+    username:"",
+    password:""
+}}
+onSubmit={values=>{
+    alert(values.username);
+    alert(values.password);
+}}
+>
+{
+    (props)=>{
+        return <form onSubmit={props.handleSubmit}>
+<input type="text" name="username" onChange={props.handleChange} />
+<input type="text" name="password" onChange={props.handleChange} />
+<button type="submit">Login</button>
+        </form>
+    }
+    }
+</Formik>
 
-</form>
 </div>
 </div>
 
